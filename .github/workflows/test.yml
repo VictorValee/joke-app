@@ -4,11 +4,18 @@ on:
   push:
 
 jobs:
- echo-test:
+ build-test:
+#  defenition plateform
   runs-on: ubuntu-latest
 
   steps:
-    - name: Echo the name
-      run: |
-        export NAME=Victor
-        echo the $NAME
+    - uses: actions/checkout@v3
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version: 16
+        
+# instructions
+    - run: npm ci
+    - run: npm run build
+    - run: npm test
