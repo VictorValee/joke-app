@@ -30,6 +30,6 @@ jobs:
 
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          heroku_api_key: ${{308d02d4-7475-41c4-89ff-1cb6813f869f}}
+          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "jokeappci" #Must be unique in Heroku
           heroku_email: "valee.victor@gmail.com"
