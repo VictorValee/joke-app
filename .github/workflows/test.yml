@@ -9,6 +9,6 @@ jobs:
 
   steps:
     - name: Echo the name
-    - run: |
+      run: |
       export NAME=Victor
       echo the $NAME
