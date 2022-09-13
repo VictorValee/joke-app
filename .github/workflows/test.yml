@@ -1,0 +1,14 @@
+name: Test workflow
+
+on:
+  push:
+
+jobs:
+ echo-test:
+  runs-on: ubuntu-lastest
+
+  steps:
+    - name: Echo the name
+    - run: |
+      expot NAME=Victor
+      echo the $NAME
