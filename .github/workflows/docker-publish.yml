@@ -2,6 +2,7 @@ name: Publish Docker Image
 
 on:
   push:
+    branch: ["main"]
 
 jobs:
   build-test:
@@ -40,5 +41,6 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           push: true
+          # va cehrcher l'image en fonction de l'architecture processeur pour la conpatibilitée
           platforms: linux/amd64,linux/arm64
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/joke-app:latest

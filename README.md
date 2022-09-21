@@ -27,7 +27,7 @@ This name is what you'll see in your github repository UI (under the "Action" ta
 
 Next, we need to tell github action when to run this workflow. We have many options for that, the most common one being by action type (push, pull_request,...) and branch.
 
-Add the on directive after the name of the worflow :
+Add the on directive after the name of the worflow :  
 
 ```yaml
 on:
