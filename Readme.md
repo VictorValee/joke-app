@@ -46,6 +46,7 @@ Install the [nektos/act](https://github.com/nektos/act) tool to run your workflo
 5. Download the logs for an entire job
 6. *Create a new repository secret called **ACTIONS_RUNNER_DEBUG** and set its value to true*
 7. *Remove the **ACTIONS_STEP_DEBUG** secret*
+
 8. Re-run the last workflow
 9. Download the logs from the latest job, and compare the two debug mode. What's the major difference ?
 10. Run your workflow with act. Don't forget to specify the event type.
