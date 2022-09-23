@@ -3,29 +3,68 @@ version: 2.1
 # on def els action qu'on a faire avec orbs
 orbs:
   node: circleci/node@5.0.2
+  heroku: cicleci/heroku@1.2.6
 
-jobs:
-  build-test:
-    docker:
-      - image: cimg/base:stable
+# jobs:
+#   build-test:
+#     docker: 
+#       - image: cimg/base:stable
 
-    steps:
-      - checkout
-      - node/install:
-        node-version: '16.13'
-      - node/install-packages:
-        cache-path: ~/project/node_modules
-        
-      - run: npm run build
-      - run: npm test
-      
-      # on install les packet avec orbs pour utiliser les caches
+#     steps:
+#       - checkout
+#       - node/install:
+#           node-version: "16.13"
+#       - node/install-packages:
+#           cache-path: ~/project/node_modules
+
+#       - run: npm install
+#       - run: npm run build
+#       - run: npm test
 
 workflows:
-  node-test:
+  build:
     jobs:
-      - build-test:
-          filters:
+      - node/test:
+        matrix:
+          parameters:
+            version:
+              - "16.15"
+              - "14.19"
+              - "12.13"
+        
+        filters:
             branches:
               only:
                 -circleci
+    
+      - node/run:
+        npm/run: build
+        filters:
+              branches:
+                only:
+                  -circleci
+    
+      - heroku/deploy-via-git:
+          app-name: "joke-app"
+          requires:
+            - node/run
+            - node/test
+          filters:
+            branches:
+              only: 
+                - circleci
+
+
+
+        steps:
+          - checkout
+          - node/install:
+            node-version: '16.13'
+          - node/install-packages:
+            cache-path: ~/project/node_modules
+
+          - run: npm run build
+          - run: npm test
+          
+          # on install les packet avec orbs pour utiliser les caches
+
