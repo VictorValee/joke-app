@@ -15,7 +15,6 @@ export class AppController {
   //   return { message: 'Hello world!' };
   // }
   @Get()
-  @Render('joke')
   async getJoke() {
     try {
       const joke = await this.appService.getJoke();

@@ -1,0 +1,31 @@
+version: 2.1
+
+# on def els action qu'on a faire avec orbs
+orbs:
+  node: circleci/node@5.0.2
+
+jobs:
+  build-test:
+    docker:
+      - image: cimg/base:stable
+
+    steps:
+      - checkout
+      - node/install:
+        node-version: '16.13'
+      - node/install-packages:
+        cache-path: ~/project/node_modules
+        
+      - run: npm run build
+      - run: npm test
+      
+      # on install les packet avec orbs pour utiliser les caches
+
+workflows:
+  node-test:
+    jobs:
+      - build-test:
+          filters:
+            branches:
+              only:
+                -circleci
